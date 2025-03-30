@@ -45,10 +45,8 @@
         <textarea name="mensagem" id="mensagem" cols="50" rows="10" required></textarea>
         <br>
         <br>
-        <input id="btnLimpar" type="reset" value="Limpar">
         <input id="btnSalvar" type="submit" value="Salvar">
         <input id="btnExcluir" type="submit" value="Excluir" onclick="excluir()">
-        <input id="btnListar" type="submit" value="Listar" onclick="listar()">
         <input id="btnCarregar" type="submit" value="Carregar Dados" onclick="carregarDados()"> <!-- carregar dados do arquivo --> 
         <hr>
         <table border=".1" cellpadding="3" cellspacing="0">
@@ -60,10 +58,12 @@
                     <th bgcolor="gray" width="130">Idade</th>
                     <th bgcolor="gray" width="130">Sexo</th>
                     <th bgcolor="gray" width="130">Cidade</th>
+                    <th bgcolor="gray" width="130">Editar/Excluir</th>
                 </tr>
             </thead>
             <tbody id="tabela">
                 <tr>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>

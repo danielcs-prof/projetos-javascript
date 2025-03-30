@@ -22,7 +22,6 @@ class PessoaController {
     init() {
         document.getElementById('btnSalvar').addEventListener('click', (e) => this.salvar(e));
         document.getElementById('btnExcluir').addEventListener('click', (e) => this.excluir(e));
-        document.getElementById('btnListar').addEventListener('click', (e) => this.listar(e));
         document.getElementById('btnCarregar').addEventListener('click', (e) => this.carregarDados(e));
     }
 
@@ -41,19 +40,39 @@ class PessoaController {
         const pessoa = new Pessoa(nome, email, idade, sexo, cidade, interesses, mensagem);
         this.pessoas.push(pessoa);
         this.atualizarTabela(); // Atualiza a tabela com a nova lista de pessoas
+        this.limparFormulario(); // Limpa os campos do formulário
     }
+    // Edita uma pessoa existente na lista
+    editarPessoa(event) {
+        const row = event.target.closest('tr'); // Obtém a linha da tabela onde o botão foi clicado
+        const index = row.rowIndex - 1; // Obtém o índice da pessoa com base na linha da tabela
+        const pessoa = this.pessoas[index];
 
+        // Preenche os campos do formulário com os dados da pessoa selecionada
+        document.getElementById('nome').value = pessoa.nome;
+        document.getElementById('email').value = pessoa.email;
+        document.getElementById('idade').value = pessoa.idade;
+        document.querySelector(`input[name="sexo"][value="${pessoa.sexo}"]`).checked = true;
+        document.getElementById('cidade').value = pessoa.cidade;
+
+        // Marca os interesses da pessoa
+        document.querySelectorAll('input[name="interesses[]"]').forEach(el => {
+            el.checked = pessoa.interesses.includes(el.value);
+        });
+
+        document.getElementById('mensagem').value = pessoa.mensagem;
+
+        // Remove a pessoa da lista para que possa ser salva novamente com as alterações
+        this.pessoas.splice(index, 1);
+        this.atualizarTabela();
+    }
     // Exclui a última pessoa da lista
     excluir(e) {
         e.preventDefault(); // Previne o comportamento padrão do formulário
-        this.pessoas.pop(); // Remove a última pessoa da lista
+        const row = e.target.closest('tr'); // Obtém a linha da tabela onde o botão foi clicado
+        const index = row.rowIndex - 1; // Obtém o índice da pessoa com base na linha da tabela
+        this.pessoas.splice(index, 1); // Remove a pessoa correspondente da lista
         this.atualizarTabela(); // Atualiza a tabela com a nova lista de pessoas
-    }
-
-    // Lista todas as pessoas na tabela
-    listar(e) {
-        e.preventDefault(); // Previne o comportamento padrão do formulário
-        this.atualizarTabela(); // Atualiza a tabela com a lista de pessoas
     }
 
     // Carrega dados de um arquivo (função ainda não implementada)
@@ -74,7 +93,35 @@ class PessoaController {
             row.insertCell(3).innerText = pessoa.idade; // Insere a idade da pessoa
             row.insertCell(4).innerText = pessoa.sexo; // Insere o sexo da pessoa
             row.insertCell(5).innerText = pessoa.cidade; // Insere a cidade da pessoa
+
+            // Cria o botão de editar
+            const btnEditar = document.createElement('button');
+            btnEditar.innerText = 'Editar';
+            // Cria o botão de excluir
+            const btnExcluir = document.createElement('button');
+            btnExcluir.type = 'button'; // Define o tipo como 'button' para evitar comportamento de submit
+            btnExcluir.innerText = 'Excluir';
+
+            const actionCell = row.insertCell(6); // Cria uma célula para os botões
+            actionCell.appendChild(btnEditar); // Adiciona o botão de editar na célula
+            actionCell.appendChild(btnExcluir); // Adiciona o botão de excluir na célula
+            actionCell.style.display = 'flex'; // Define o estilo flex para alinhar os botões
+            actionCell.style.gap = '5px'; // Adiciona um espaçamento entre os botões
+
+            btnEditar.addEventListener('click', (event) => this.editarPessoa(event));
+            btnExcluir.addEventListener('click', (event) => this.excluir(event));
+
         });
+    }
+    // Limpa os campos do formulário
+    limparFormulario() {
+        document.getElementById('nome').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('idade').value = '';
+        document.querySelectorAll('input[name="sexo"]').forEach(el => el.checked = false);
+        document.getElementById('cidade').value = '';
+        document.querySelectorAll('input[name="interesses[]"]').forEach(el => el.checked = false);
+        document.getElementById('mensagem').value = '';
     }
 }
 
