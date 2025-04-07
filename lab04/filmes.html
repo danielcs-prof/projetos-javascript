@@ -63,22 +63,23 @@
           </thead>
           <tbody>
             <tr>
-              <th>1</th>
-              <th>Senhor dos Aneis</th>
-              <th>Ficção</th>
-              <th>18</th>
-              <th>2h</th>
-              <th>07/04/2025</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
               <th>
-                <button id="btnEditar" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#idModalFilme" >
-                  <i class="bi bi-pencil-square"></i>
-                </button>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <button id="btnExcluir" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalExcluirFilme">
-                  <i class="bi bi-trash-fill"></i>
-                </button>
+                <td>
+                  <button class="btn btn-warning btn-sm btn-editar" data-id="${filme.id}">
+                    <i class="bi bi-pencil-square"></i>
+                  </button>
+                  &nbsp;
+                  <button class="btn btn-danger btn-sm btn-excluir" data-id="${filme.id}">
+                    <i class="bi bi-trash-fill"></i>
+                  </button>
+                </td>
               </th>
-
             </tr>
           </tbody>
         </table>
@@ -88,7 +89,7 @@
     <!-- fim row -->
 
     <!-- Modal: Cadastro de Novo Filme ou Editar Filme Existente -->
-    <div class="modal fade" id="idModalFilme" tabindex="-1" aria-labelledby="idModalFilme" aria-hidden="true">
+    <div class="modal fade" id="idModalFilme" tabindex="-1" aria-labelledby="idModalFilmeTitulo" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header text-white bg-dark">
@@ -124,8 +125,8 @@
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
           </div>
           <div class="modal-body">
-              <h5>Deseja realmente excluir o registro?</h5>
-                
+            <h5>Deseja realmente excluir o registro?</h5>
+          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
             <button type="button" class="btn btn-danger" id="btnExcluirFilme" data-bs-dismiss="modal">Excluir</button>
