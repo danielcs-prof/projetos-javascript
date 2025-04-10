@@ -9,8 +9,9 @@ class FilmeController {
 
     init() {
         const btnNovo = document.getElementById("btnNovo");
-        const btnSalvarFilme = document.getElementById("btnSalvarFilme");
+        const btnFecharModal = document.getElementById("btnFecharModal")
         const btnCancelar = document.querySelector(".btn-secondary[data-bs-dismiss='modal']");
+        const btnSalvarFilme = document.getElementById("btnSalvarFilme");
         const btnExcluirFilme = document.getElementById("btnExcluirFilme");
 
         btnNovo.addEventListener("click", this.abrirModalCadastro.bind(this));
@@ -19,6 +20,11 @@ class FilmeController {
             this.limparFormulario();
             this.fecharModal("idModalFilme");
         });
+        btnFecharModal.addEventListener('click',() =>{
+            this.limparFormulario();
+            this.fecharModal("idModalFilme")
+        })
+        btnFecharModal.addEventListener('click',this.fecharModal)
         btnExcluirFilme.addEventListener("click", () => this.excluir(this.idParaExcluir));
 
         this.carregarFilmesDoLocalStorage();
@@ -45,14 +51,12 @@ class FilmeController {
     }
 
     criarFilmeDoFormulario() {
-        const duracao = document.getElementById("duracao").value;
-        console.log("Duração capturada:", duracao); // Verifica o valor capturado
         return new Filme(
             this.idEmEdicao || Date.now(),
             document.getElementById("titulo").value,
             document.getElementById("genero").value,
             parseInt(document.getElementById("classificacao").value),
-            duracao,
+            document.getElementById("duracao").value,
             document.getElementById("dataEstreia").value
         );
     }
@@ -72,15 +76,15 @@ class FilmeController {
     atualizarTabela() {
         const tbody = document.querySelector("tbody");
         tbody.innerHTML = "";
-
         this.listaFilmes.forEach(filme => {
             const tr = document.createElement("tr");
+            console.log(filme)
             tr.innerHTML = `
                 <td>${filme.id}</td>
                 <td><strong>${filme.titulo}</strong></td>
                 <td>${filme.genero}</td>
                 <td>${filme.classificacao}</td>
-                <td>${filme.duracao}</td> <!-- Exibe a duração -->
+                <td>${filme.duracao}</td>
                 <td>${this.formatarData(filme.dataEstreia)}</td>
                 <td>
                     <button class="btn btn-warning btn-sm btn-editar" data-id="${filme.id}">

@@ -27,7 +27,7 @@
     <hr>
     <div class="row">
       <div class="col-12 col-sm-6 col-lg-4">
-        <button id="btnNovo" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#idModalFilme" >
+        <button id="btnNovo" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#idModalFilme">
           Adicionar Filme
         </button>
 
@@ -37,7 +37,7 @@
     <!-- fim row -->
     <br>
     <div class="row">
-      <div class="col-12 col-sm-6 col-lg4">
+      <div class="col-12 col-sm-6 col-lg-4">
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Digite o título do filme">
           <button type="button" class="btn btn-primary">Buscar</button>
@@ -69,17 +69,8 @@
               <th></th>
               <th></th>
               <th></th>
-              <th>
-                <td>
-                  <button class="btn btn-warning btn-sm btn-editar" data-id="${filme.id}">
-                    <i class="bi bi-pencil-square"></i>
-                  </button>
-                  &nbsp;
-                  <button class="btn btn-danger btn-sm btn-excluir" data-id="${filme.id}">
-                    <i class="bi bi-trash-fill"></i>
-                  </button>
-                </td>
-              </th>
+              <th></th>
+
             </tr>
           </tbody>
         </table>
@@ -88,32 +79,33 @@
     </div>
     <!-- fim row -->
 
-    <!-- Modal: Cadastro de Novo Filme ou Editar Filme Existente -->
-    <div class="modal fade" id="idModalFilme" tabindex="-1" aria-labelledby="idModalFilmeTitulo" aria-hidden="true">
+    <!-- Modal: Cadastro e Edição Filme-->
+    <div class="modal fade" id="idModalFilme" tabindex="-1" aria-labelledby="idModalFilme" aria-hidden="true">
       <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header text-white bg-dark">
-            <h5 class="modal-title" id="idModalFilmeTitulo">Cadastrar Novo Filme</h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-              aria-label="Fechar"></button>
-          </div>
-          <div class="modal-body">
-            <form id="formFilme">
-              <input type="hidden" id="idFilme">
-              <input type="text" class="form-control mb-2" id="titulo" placeholder="Título" required>
-              <input type="text" class="form-control mb-2" id="genero" placeholder="Gênero" required>
-              <input type="number" class="form-control mb-2" id="classificacao" placeholder="Classificação" required>
-              <input type="text" class="form-control mb-2" id="duracao" placeholder="Duração (ex: 2h)" required>
-              <input type="date" class="form-control mb-2" id="dataEstreia" required>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary" id="btnSalvarFilme">Salvar</button>
-          </div>
+      <div class="modal-content">
+        <div class="modal-header text-white bg-dark">
+        <h5 class="modal-title" id="idModalFilmeTitulo">Cadastrar Novo Filme</h5>
+        <button id="btnFecharModal" type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+          aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+        <form id="formFilme">
+          <input type="hidden" id="idFilme">
+          <input type="text" class="form-control mb-2" id="titulo" placeholder="Título" required>
+          <input type="text" class="form-control mb-2" id="genero" placeholder="Gênero" required>
+          <input type="number" class="form-control mb-2" id="classificacao" placeholder="Classificação" required>
+          <input type="text" class="form-control mb-2" id="duracao" placeholder="Duração (ex: 2)" required>
+          <input type="date" class="form-control mb-2" id="dataEstreia" required>
+        </form>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="btnSalvarFilme">Salvar</button>
         </div>
       </div>
+      </div>
     </div>
+    
     <!-- Modal: Excluir Filme -->
     <div class="modal fade" id="modalExcluirFilme" tabindex="-1" aria-labelledby="modalExcluirFilme" aria-hidden="true">
       <div class="modal-dialog">
@@ -122,23 +114,24 @@
             <img src="./img/aviso.png" alt="" class="img-fluid">
             &nbsp;&nbsp;&nbsp;
             <h4 class="modal-title text-white">Alerta</h4>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            <button id="btnFechar" type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+              aria-label="Fechar"></button>
           </div>
           <div class="modal-body">
             <h5>Deseja realmente excluir o registro?</h5>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-danger" id="btnExcluirFilme" data-bs-dismiss="modal">Excluir</button>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-danger" id="btnExcluirFilme" data-bs-dismiss="modal">Excluir</button>
+            </div>
           </div>
         </div>
       </div>
+
     </div>
 
-  </div>
-
-  <script src="./js/bootstrap.bundle.min.js"></script>
-  <script type="module" src="./controller/filmeController.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="./controller/filmeController.js"></script>
 </body>
 
 </html>
